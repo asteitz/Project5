@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Project5</string>
+    <string name="Source_Language">Source Language</string>
+    <string name="Translation_Language">Translation </string>
+
+
+    <string name="lang_spanish">Spanish </string>
+    <string name="lang_german">German </string>
+    <string name="lang_english">English </string>
+
+    <string name="trans_spanish">Spanish </string>
+    <string name="trans_german">German </string>
+    <string name="trans_english">English </string>
+
+    <string name="Translation">Translation</string>
+
+
 </resources>
