@@ -49,7 +49,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
-                android:id="@+id/SOURCE"
+                android:id="@+id/Source"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
@@ -66,7 +66,7 @@
 
                 </TextView>
                 <RadioButton
-                    android:id="@+id/buttonEasy"
+                    android:id="@+id/englishSource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lang_english"
@@ -75,7 +75,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/buttonMedium"
+                    android:id="@+id/spanishSource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lang_spanish"
@@ -84,7 +84,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/buttonHard"
+                    android:id="@+id/germanSource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lang_german"
@@ -95,7 +95,7 @@
             </RadioGroup>
 
             <RadioGroup
-                android:id="@+id/operators"
+                android:id="@+id/Trans"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -111,7 +111,7 @@
 
                 </TextView>
                 <RadioButton
-                    android:id="@+id/buttonAddition"
+                    android:id="@+id/spanishTrans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -120,7 +120,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
                 <RadioButton
-                    android:id="@+id/buttonSubtraction"
+                    android:id="@+id/germanTrans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/trans_german"
@@ -128,7 +128,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp" />
                 <RadioButton
-                    android:id="@+id/buttonMultiplication"
+                    android:id="@+id/englishTrans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
