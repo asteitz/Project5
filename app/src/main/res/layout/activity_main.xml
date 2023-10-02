@@ -38,7 +38,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -248,19 +248,19 @@
         </LinearLayout>
 
         <!--  Start Button for the opening screen to begin the game      -->
-        <Button
-            android:id="@+id/buttonStart"
+        <fragment
+            android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="275dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="61dp"
 
-
-            android:background="@color/start"
-            android:text="START"
-            android:textColor="@color/black"
+            android:background="@color/white"
             android:textSize="35dp"
-            app:cornerRadius="0dp" />
+            app:cornerRadius="0dp"
+
+
+            />
 
 
         <!--   Closing Tags     -->
