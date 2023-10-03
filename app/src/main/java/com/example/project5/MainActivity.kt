@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.project5.databinding.ActivityMainBinding
@@ -53,49 +54,90 @@ class MainActivity : AppCompatActivity() {
             }
         }
         viewModel.bindingFrag.observe(this, Observer { bindingFrag ->
-        var options = TranslatorOptions.Builder()
-        if(source != "") {
-            if (source == "English") {
-                options
-                    .setSourceLanguage(TranslateLanguage.ENGLISH)
-
-            } else if (source == "Spanish") {
-                options
-                    .setSourceLanguage(TranslateLanguage.SPANISH)
-
-            } else {
-                options
-                    .setSourceLanguage(TranslateLanguage.GERMAN)
-            }
-        }
-        if(trans != ""){
-            if (trans == "English") {
-                options
-                    .setTargetLanguage(TranslateLanguage.ENGLISH)
-            }
-            else if (trans == "Spanish") {
-                options
-                    .setTargetLanguage(TranslateLanguage.SPANISH)
-            }
-            else {
-                options
-                    .setTargetLanguage(TranslateLanguage.GERMAN)
-            }
-
-        }
-        var finalOptions = options.build()
+            Log.d("MyActivity", "Observed a change in bindingFrag: $bindingFrag")
+            var options = TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.ENGLISH)
+                .setTargetLanguage(TranslateLanguage.ENGLISH)
+                .build();
+            var count = 0
         bindingFrag.editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(source != "") {
+                    if (source == "English") {
+                        if (trans == "Spanish") {
+                            options = TranslatorOptions.Builder()
+                                .setSourceLanguage(TranslateLanguage.ENGLISH)
+                                .setTargetLanguage(TranslateLanguage.SPANISH)
+                                .build();
+                        }
+                        if (trans == "German") {
+                            options = TranslatorOptions.Builder()
+                                .setSourceLanguage(TranslateLanguage.ENGLISH)
+                                .setTargetLanguage(TranslateLanguage.GERMAN)
+                                .build();
+                        }
+                    }
+
+                } else if (source == "Spanish") {
+                    if (trans == "English") {
+                        options = TranslatorOptions.Builder()
+                            .setSourceLanguage(TranslateLanguage.SPANISH)
+                            .setTargetLanguage(TranslateLanguage.ENGLISH)
+                            .build();
+                    }
+                    if (trans == "German") {
+                        options = TranslatorOptions.Builder()
+                            .setSourceLanguage(TranslateLanguage.SPANISH)
+                            .setTargetLanguage(TranslateLanguage.GERMAN)
+                            .build();
+                    }
+                }
+                else {
+                    if (trans == "English") {
+                        options = TranslatorOptions.Builder()
+                            .setSourceLanguage(TranslateLanguage.GERMAN)
+                            .setTargetLanguage(TranslateLanguage.ENGLISH)
+                            .build();
+                    }
+                    if (trans == "Spanish") {
+                        options = TranslatorOptions.Builder()
+                            .setSourceLanguage(TranslateLanguage.GERMAN)
+                            .setTargetLanguage(TranslateLanguage.SPANISH)
+                            .build();
+                    }
+                }
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             }
 
             override fun afterTextChanged(s: Editable?) {
+
                 var curText = s.toString()
-                val translator = Translation.getClient(finalOptions)
-                var finalText = translator.translate(curText).toString()
-                bindingMain.traslatedTextView.text = finalText
+                val translator = Translation.getClient(options)
+                translator.downloadModelIfNeeded().addOnFailureListener { exception ->
+                    Log.e("IfNeededDownload", "Download failed: ${exception.message}")
+                }
+                var task = translator.translate(curText)
+
+                task.addOnSuccessListener { translatedText ->
+                    if(count == 3) {
+                        options
+                        var finalText = translatedText
+                        bindingMain.traslatedTextView.text = finalText
+                    }
+                    else{
+                        options
+                        var finalText = translatedText
+                        bindingMain.traslatedTextView.text = finalText
+                        count++
+                    }
+                }
+                task.addOnFailureListener { exception ->
+                    Log.e("Translate","Translation failed: ${exception.message}")
+                }
+
 
 
             }

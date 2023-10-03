@@ -197,8 +197,9 @@
 
         </TextView>
             <!--  Start Button for the opening screen to begin the game      -->
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/fragment"
+                android:name="com.example.project5.Fragment1"
                 android:layout_width="match_parent"
                 android:layout_height="224dp"
                 android:layout_marginTop="10dp"
