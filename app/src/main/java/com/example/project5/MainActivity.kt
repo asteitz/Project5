@@ -15,10 +15,27 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 
 class MainActivity : AppCompatActivity() {
+    /**
+     * Creating the constructor and initializing the variables that are used in the view grouping throughout the file
+     *
+     * @variable bindingMain
+     * @variable bindingFrag
+     * @variable viewModel
+     *
+     */
     private lateinit var bindingMain: ActivityMainBinding
     private  lateinit var bindingFrag: Fragment1Binding
     private  lateinit var viewModel: TheViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
+        /**
+         * Overriding the onCreate() to accommodate the view groups
+         * takes the view groups, binds them, and the then uses them to pull in the text and identify which values have been assigned.
+         *
+         * Uses the binding to inflate the view
+         * Sets global variables to their set languages selected by user (using view groups)
+         * @param Bundle of safeargs passed in
+         * @return View
+         */
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TheViewModel::class.java)
         bindingMain = ActivityMainBinding.inflate(layoutInflater)
@@ -26,20 +43,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         var source = ""
         var trans = ""
+        // checks which has been clicked using the on listener
         bindingMain.Source.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
+                // if the binding id is set to English as the source
                 bindingMain.englishSource.id -> {
                     source = "English"
                 }
+                // if the binding id is set to Spanish as the source
                 bindingMain.spanishSource.id -> {
                     source = "Spanish"
                 }
+                // if the binding id is set to German as the source
                 bindingMain.germanSource.id -> {
                     source = "German"
                 }
             }
         }
-
+        // same process but for setting the language ot translate to
         bindingMain.Trans.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 bindingMain.englishTrans.id -> {
@@ -53,6 +74,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // used when observing the text entered by the user pulling from textview in the fragment.kt file
         viewModel.bindingFrag.observe(this, Observer { bindingFrag ->
             Log.d("MyActivity", "Observed a change in bindingFrag: $bindingFrag")
             var options = TranslatorOptions.Builder()
@@ -60,8 +83,19 @@ class MainActivity : AppCompatActivity() {
                 .setTargetLanguage(TranslateLanguage.ENGLISH)
                 .build();
             var count = 0
+
+
         bindingFrag.editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                /**
+                 * Overriding the beforeTextChanged() to accommodate the accomidate words being entered in real time pulling from the TextView in Fragment
+                 *
+                 *
+                 * p0 is a char sequence of characters to help define where the word is and what is should be translated to
+                 * deploys according source and translated languages
+                 * @param p0
+                 * @return builds up the string to be translated to
+                 */
                 if (source != "") {
                     if (source == "English") {
                         if (trans == "Spanish") {
@@ -108,9 +142,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+
             }
 
             override fun afterTextChanged(s: Editable?) {
+                /**
+                 * Overriding the afterTextChanged() to check that as the words were entered they were translated correctly
+                 *
+                 * s is like a string where we can change the text - great for in this case "proof reading" the translated text
+                 * if something is not translatable (charecters instead of letters, etc.) there is an error message displayed instead of the app crashing
+                 * @param s
+                 * @return translated text in the text view
+                 */
 
                 var curText = s.toString()
                 val translator = Translation.getClient(options)
