@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             var count = 0
         bindingFrag.editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(source != "") {
+                if (source != "") {
                     if (source == "English") {
                         if (trans == "Spanish") {
                             options = TranslatorOptions.Builder()
@@ -76,34 +76,32 @@ class MainActivity : AppCompatActivity() {
                                 .setTargetLanguage(TranslateLanguage.GERMAN)
                                 .build();
                         }
-                    }
-
-                } else if (source == "Spanish") {
-                    if (trans == "English") {
-                        options = TranslatorOptions.Builder()
-                            .setSourceLanguage(TranslateLanguage.SPANISH)
-                            .setTargetLanguage(TranslateLanguage.ENGLISH)
-                            .build();
-                    }
-                    if (trans == "German") {
-                        options = TranslatorOptions.Builder()
-                            .setSourceLanguage(TranslateLanguage.SPANISH)
-                            .setTargetLanguage(TranslateLanguage.GERMAN)
-                            .build();
-                    }
-                }
-                else {
-                    if (trans == "English") {
-                        options = TranslatorOptions.Builder()
-                            .setSourceLanguage(TranslateLanguage.GERMAN)
-                            .setTargetLanguage(TranslateLanguage.ENGLISH)
-                            .build();
-                    }
-                    if (trans == "Spanish") {
-                        options = TranslatorOptions.Builder()
-                            .setSourceLanguage(TranslateLanguage.GERMAN)
-                            .setTargetLanguage(TranslateLanguage.SPANISH)
-                            .build();
+                    } else if (source == "Spanish") {
+                        if (trans == "English") {
+                            options = TranslatorOptions.Builder()
+                                .setSourceLanguage(TranslateLanguage.SPANISH)
+                                .setTargetLanguage(TranslateLanguage.ENGLISH)
+                                .build();
+                        }
+                        if (trans == "German") {
+                            options = TranslatorOptions.Builder()
+                                .setSourceLanguage(TranslateLanguage.SPANISH)
+                                .setTargetLanguage(TranslateLanguage.GERMAN)
+                                .build();
+                        }
+                    } else {
+                        if (trans == "English") {
+                            options = TranslatorOptions.Builder()
+                                .setSourceLanguage(TranslateLanguage.GERMAN)
+                                .setTargetLanguage(TranslateLanguage.ENGLISH)
+                                .build();
+                        }
+                        if (trans == "Spanish") {
+                            options = TranslatorOptions.Builder()
+                                .setSourceLanguage(TranslateLanguage.GERMAN)
+                                .setTargetLanguage(TranslateLanguage.SPANISH)
+                                .build();
+                        }
                     }
                 }
             }

@@ -190,7 +190,7 @@
 
 
             android:background="@color/white"
-            android:text="TRANSLATED TEXT CHANGE LATER BY ACCESSING THE STRING CLASS IN AN ARRAY"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="35dp"
             app:cornerRadius="0dp">
